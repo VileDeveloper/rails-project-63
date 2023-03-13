@@ -47,7 +47,7 @@ class FormFor
   def form_fields_array(user, field_name, as, **parameters)
     fields = []
 
-    fields << FormField.new(user, field_name, :label, **parameters).build if as == :default
+    fields << FormField.new(user, field_name, :label, **parameters).build if as != :submit
     fields << FormField.new(user, field_name, as, **parameters).build
 
     fields

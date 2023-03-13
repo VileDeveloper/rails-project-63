@@ -28,8 +28,6 @@ class BaseField
 
   def field_value(user, field_name)
     user.public_send(field_name)
-  rescue StandardError
-    raise "'public_send': undefined method '#{field_name}' for #{user} (NoMethodError)"
   end
 
   def field_tag
