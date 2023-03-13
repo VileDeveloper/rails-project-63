@@ -7,9 +7,15 @@ class HexletCodeTest < Minitest::Test
     user_struct = Struct.new(:name, :job, :gender, keyword_init: true)
 
     @user = user_struct.new(name: 'Crash Dummy', job: 'hexlet', gender: 'm')
-    puts File.expand_path('fixtures/form_for_with_inputs.html', __dir__)
+
+    add_fixtures
+  end
+
+  def add_fixtures
     @fixture_with_inputs = File.read(File.expand_path('fixtures/form_for_with_inputs.html', __dir__))
     @fixture_with_text_areas = File.read(File.expand_path('fixtures/form_for_with_text_areas.html', __dir__))
+    @fixture_with_submit = File.read(File.expand_path('fixtures/form_for_with_submit.html', __dir__))
+    @fixture_with_custom_submit = File.read(File.expand_path('fixtures/form_for_with_custom_submit.html', __dir__))
   end
 
   def test_form_for_success
@@ -42,5 +48,27 @@ class HexletCodeTest < Minitest::Test
       end
 
     assert { form_for_html == @fixture_with_text_areas }
+  end
+
+  def test_form_for_with_submit_success
+    form_for_html =
+      ::HexletCode.form_for(@user) do |f|
+        f.input :job, as: :text, rows: 50, cols: 50
+        f.input :name, as: :text
+        f.submit
+      end
+
+    assert { form_for_html == @fixture_with_submit }
+  end
+
+  def test_form_for_with_custom_submit_success
+    form_for_html =
+      ::HexletCode.form_for(@user) do |f|
+        f.input :job, as: :text, rows: 50, cols: 50
+        f.input :name, as: :text
+        f.submit 'Custom save'
+      end
+
+    assert { form_for_html == @fixture_with_custom_submit }
   end
 end

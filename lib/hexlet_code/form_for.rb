@@ -24,6 +24,10 @@ class FormFor
     @input_fields << { field_name: field_name, as: as, parameters: parameters }
   end
 
+  def submit(value = 'Save', as: :submit, **parameters)
+    @input_fields << { field_name: value, as: as, parameters: parameters }
+  end
+
   private
 
   def input_fields_html(user, input_fields)
@@ -35,9 +39,18 @@ class FormFor
         as = input_field[:as]
         parameters = input_field[:parameters]
 
-        FormField.new(user, field_name, as, **parameters).render_html
-      end
+        form_fields_array(user, field_name, as, **parameters)
+      end.flatten
 
     "\n  #{input_fields_html_array.join("\n  ")}\n"
+  end
+
+  def form_fields_array(user, field_name, as, **parameters)
+    fields = []
+
+    fields << FormField.new(user, field_name, :label, **parameters).render_html if as == :default
+    fields << FormField.new(user, field_name, as, **parameters).render_html
+
+    fields
   end
 end

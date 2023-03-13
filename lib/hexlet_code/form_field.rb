@@ -24,6 +24,10 @@ class FormField
     case as
     when :text
       TextAreaField
+    when :submit
+      SubmitField
+    when :label
+      LabelField
     else
       InputField
     end
