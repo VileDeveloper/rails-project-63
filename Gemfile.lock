@@ -2,6 +2,9 @@ PATH
   remote: .
   specs:
     hexlet_code (0.1.0)
+      minitest-power_assert
+      rake
+      rubocop
 
 GEM
   remote: https://rubygems.org/
