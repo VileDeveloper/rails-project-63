@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Form_for html generator'
   spec.description = 'It is form generator like form_for default rails html generator'
   spec.homepage = 'https://github.com/VileDeveloper/rails-project-63'
-  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_ruby_version = '>= 3.1'
 
   spec.metadata['allowed_push_host'] = ''
 

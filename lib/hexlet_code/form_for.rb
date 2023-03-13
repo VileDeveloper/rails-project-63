@@ -10,7 +10,7 @@ class FormFor
 
   def initialize(user, url: DEFAULT_ACTION, method: DEFAULT_METHOD, **options)
     @user = user
-    @form_attributes = options.merge(action: url, method: method)
+    @form_attributes = options.merge(action: url, method:)
     @input_fields = []
   end
 
@@ -25,11 +25,11 @@ class FormFor
   end
 
   def input(field_name, as: :default, **parameters)
-    @input_fields << { field_name: field_name, as: as, parameters: parameters }
+    @input_fields << { field_name:, as:, parameters: }
   end
 
   def submit(value = 'Save', as: :submit, **parameters)
-    @input_fields << { field_name: value, as: as, parameters: parameters }
+    @input_fields << { field_name: value, as:, parameters: }
   end
 
   private

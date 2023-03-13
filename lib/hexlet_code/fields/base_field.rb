@@ -14,8 +14,8 @@ class BaseField
     tag_parameters = collect_tag_parameters(@user, @field_name, **@parameters)
 
     {
-      field_tag: field_tag,
-      tag_parameters: tag_parameters,
+      field_tag:,
+      tag_parameters:,
       tag_body: tag_body(@user, @field_name)
     }
   end
