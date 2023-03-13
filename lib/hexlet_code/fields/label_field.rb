@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-autoload :Tag, File.expand_path('../tag.rb', __dir__)
 autoload :BaseField, File.expand_path('base_field.rb', __dir__)
 
 # Label field class for substitution label before input field

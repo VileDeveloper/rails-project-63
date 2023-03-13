@@ -2,6 +2,8 @@
 
 autoload :InputField, File.expand_path('fields/input_field.rb', __dir__)
 autoload :TextAreaField, File.expand_path('fields/text_area_field.rb', __dir__)
+autoload :SubmitField, File.expand_path('fields/submit_field.rb', __dir__)
+autoload :LabelField, File.expand_path('fields/label_field.rb', __dir__)
 
 # This is main Field class with choice fields kind
 class FormField
@@ -12,10 +14,10 @@ class FormField
     @parameters = parameters
   end
 
-  def render_html
+  def build
     field_class = field_class_by_as(@as)
 
-    field_class.new(@user, @field_name, **@parameters).render_html
+    field_class.new(@user, @field_name, **@parameters).build
   end
 
   private

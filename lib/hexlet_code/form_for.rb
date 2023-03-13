@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-autoload :Tag, File.expand_path('tag.rb', __dir__)
 autoload :FormField, File.expand_path('form_field.rb', __dir__)
+autoload :HtmlFormGenerator, File.expand_path('generators/html_form_generator.rb', __dir__)
 
 # This is class which has rendering form tags logic
 class FormFor
@@ -15,9 +15,13 @@ class FormFor
   end
 
   def render_html
-    input_fields_html = input_fields_html(@user, @input_fields)
+    form_for_render = { field_tag: 'form', tag_parameters: @form_attributes }
+    input_fields_for_render = input_fields_for_render(@user, @input_fields)
 
-    ::Tag.build('form', **@form_attributes) { input_fields_html }
+    HtmlFormGenerator.generate(
+      form_for: form_for_render,
+      input_fields: input_fields_for_render
+    )
   end
 
   def input(field_name, as: :default, **parameters)
@@ -30,26 +34,21 @@ class FormFor
 
   private
 
-  def input_fields_html(user, input_fields)
-    return '' if input_fields.empty?
+  def input_fields_for_render(user, input_fields)
+    input_fields.map do |input_field|
+      field_name = input_field[:field_name]
+      as = input_field[:as]
+      parameters = input_field[:parameters]
 
-    input_fields_html_array =
-      input_fields.map do |input_field|
-        field_name = input_field[:field_name]
-        as = input_field[:as]
-        parameters = input_field[:parameters]
-
-        form_fields_array(user, field_name, as, **parameters)
-      end.flatten
-
-    "\n  #{input_fields_html_array.join("\n  ")}\n"
+      form_fields_array(user, field_name, as, **parameters)
+    end.flatten
   end
 
   def form_fields_array(user, field_name, as, **parameters)
     fields = []
 
-    fields << FormField.new(user, field_name, :label, **parameters).render_html if as == :default
-    fields << FormField.new(user, field_name, as, **parameters).render_html
+    fields << FormField.new(user, field_name, :label, **parameters).build if as == :default
+    fields << FormField.new(user, field_name, as, **parameters).build
 
     fields
   end

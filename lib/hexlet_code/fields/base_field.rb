@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-autoload :Tag, File.expand_path('../tag.rb', __dir__)
-
 # Parent class for all kinds of fields
 class BaseField
   FIELD_TAG = ''
@@ -12,10 +10,14 @@ class BaseField
     @parameters = parameters
   end
 
-  def render_html
+  def build
     tag_parameters = collect_tag_parameters(@user, @field_name, **@parameters)
 
-    ::Tag.build(field_tag, **tag_parameters) { tag_body(@user, @field_name) }
+    {
+      field_tag: field_tag,
+      tag_parameters: tag_parameters,
+      tag_body: tag_body(@user, @field_name)
+    }
   end
 
   private
