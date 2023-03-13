@@ -28,6 +28,7 @@ end
 #   <input name="name" type="text" value="Crash Dummy">
 #   <label for="gender">m</label>
 #   <input name="gender" type="text" value="m">
+#   <label for="job">hexlet</label>
 #   <textarea name="job" cols="20" rows="40">hexlet</textarea>
 #   <input type="submit" value="Save">
 # </form>
