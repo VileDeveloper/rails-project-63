@@ -8,7 +8,7 @@ class LabelField < BaseField
 
   private
 
-  def collect_tag_parameters(_user, field_name, **_parameters)
+  def collect_tag_parameters(_resource, field_name, **_parameters)
     tag_parameters = {}
 
     tag_parameters[:for] = field_name
@@ -16,8 +16,8 @@ class LabelField < BaseField
     tag_parameters
   end
 
-  def tag_body(user, field_name)
-    field_value(user, field_name)
+  def tag_body(resource, field_name)
+    field_value(resource, field_name)
   end
 
   def field_tag

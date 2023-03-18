@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module generate html tag by parameters
-module Tag
+module TagBuilder
   PAIRED_TAGS = %w[div form head html label p span table textarea ul].freeze
   UNPAIRED_TAGS = %w[br hr img input meta].freeze
 

@@ -12,22 +12,24 @@ class HexletCodeTest < Minitest::Test
   end
 
   def add_fixtures
-    @fixture_with_inputs = File.read(File.expand_path('fixtures/form_for_with_inputs.html', __dir__))
-    @fixture_with_text_areas = File.read(File.expand_path('fixtures/form_for_with_text_areas.html', __dir__))
-    @fixture_with_submit = File.read(File.expand_path('fixtures/form_for_with_submit.html', __dir__))
-    @fixture_with_custom_submit = File.read(File.expand_path('fixtures/form_for_with_custom_submit.html', __dir__))
+    @fixture_form_default_values = read_fixture('fixture_form_default_values.html')
+    @fixture_form_with_url = read_fixture('fixture_form_with_url.html')
+    @fixture_with_inputs = read_fixture('form_with_inputs.html')
+    @fixture_with_text_areas = read_fixture('form_with_text_areas.html')
+    @fixture_with_submit = read_fixture('form_with_submit.html')
+    @fixture_with_custom_submit = read_fixture('form_with_custom_submit.html')
   end
 
   def test_form_for_success
     form_for_html = ::HexletCode.form_for(@user)
 
-    assert { form_for_html == '<form action="#" method="post"></form>' }
+    assert { form_for_html == @fixture_form_default_values }
   end
 
   def test_form_for_with_url_success
     form_for_html = ::HexletCode.form_for(@user, url: 'test/usr/path')
 
-    assert { form_for_html == '<form action="test/usr/path" method="post"></form>' }
+    assert { form_for_html == @fixture_form_with_url }
   end
 
   def test_form_for_with_inputs_success

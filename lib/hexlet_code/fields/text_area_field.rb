@@ -10,7 +10,7 @@ class TextAreaField < BaseField
 
   private
 
-  def collect_tag_parameters(_user, field_name, **parameters)
+  def collect_tag_parameters(_resource, field_name, **parameters)
     tag_parameters = {}
 
     tag_parameters[:name] = field_name
@@ -20,8 +20,8 @@ class TextAreaField < BaseField
     tag_parameters.merge(parameters)
   end
 
-  def tag_body(user, field_name)
-    field_value(user, field_name)
+  def tag_body(resource, field_name)
+    field_value(resource, field_name)
   end
 
   def field_tag

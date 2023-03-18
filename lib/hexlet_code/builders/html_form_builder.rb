@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-autoload :Tag, File.expand_path('../tag.rb', __dir__)
+autoload :TagBuilder, File.expand_path('tag_builder.rb', __dir__)
 
-# Module generate html form by form_for and input_fields hashes
-module HtmlFormGenerator
+# Module build html form by form_for and input_fields hashes
+module HtmlFormBuilder
   class << self
-    def generate(form_for:, input_fields:)
+    def build(form_for:, input_fields:)
       field_tag = form_for[:field_tag]
       tag_parameters = form_for[:tag_parameters]
       input_fields_html = input_fields_html(input_fields)
 
-      ::Tag.build(field_tag, **tag_parameters) { input_fields_html }
+      ::TagBuilder.build(field_tag, **tag_parameters) { input_fields_html }
     end
 
     private
@@ -24,7 +24,7 @@ module HtmlFormGenerator
           tag_parameters = input_field[:tag_parameters]
           tag_body = input_field[:tag_body]
 
-          ::Tag.build(field_tag, **tag_parameters) { tag_body }
+          ::TagBuilder.build(field_tag, **tag_parameters) { tag_body }
         end
 
       "\n  #{input_fields_html_array.join("\n  ")}\n"

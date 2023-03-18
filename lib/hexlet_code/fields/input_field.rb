@@ -9,17 +9,17 @@ class InputField < BaseField
 
   private
 
-  def collect_tag_parameters(user, field_name, **parameters)
+  def collect_tag_parameters(resource, field_name, **parameters)
     tag_parameters = {}
 
     tag_parameters[:name] = field_name
     tag_parameters[:type] = FIELD_TYPE
-    tag_parameters[:value] = field_value(user, field_name)
+    tag_parameters[:value] = field_value(resource, field_name)
 
     tag_parameters.merge(parameters)
   end
 
-  def tag_body(_user, _field_name)
+  def tag_body(_resource, _field_name)
     ''
   end
 

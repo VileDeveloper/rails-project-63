@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/hexlet_code/version'
+autoload :HexletCodeVersion, File.expand_path('lib/hexlet_code/version', __dir__)
 
 Gem::Specification.new do |spec|
   spec.name = 'hexlet_code'
-  spec.version = HexletCode::VERSION
+  spec.version = HexletCodeVersion::VERSION
   spec.authors = ['VileDeveloper']
   spec.email = ['vladimirlitov131127@gmail.com']
 
@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'activesupport'
   spec.add_dependency 'minitest-power_assert'
   spec.add_dependency 'rake'
   spec.add_dependency 'rubocop'

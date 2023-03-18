@@ -9,7 +9,7 @@ class SubmitField < BaseField
 
   private
 
-  def collect_tag_parameters(_user, field_name, **parameters)
+  def collect_tag_parameters(_resource, field_name, **parameters)
     tag_parameters = {}
 
     tag_parameters[:type] = FIELD_TYPE
@@ -18,7 +18,7 @@ class SubmitField < BaseField
     tag_parameters.merge(parameters)
   end
 
-  def tag_body(_user, _field_name)
+  def tag_body(_resource, _field_name)
     ''
   end
 
