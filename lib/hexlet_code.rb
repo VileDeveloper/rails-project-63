@@ -9,10 +9,10 @@ module HexletCode
 
   class << self
     def form_for(resource, **options)
-      form_for_inst = FormBuilder.new(resource, **options)
-      yield(form_for_inst) if block_given?
+      builder = FormBuilder.new(resource, **options)
+      yield(builder) if block_given?
 
-      form_for_inst.render_html
+      builder.render_html
     end
   end
 end

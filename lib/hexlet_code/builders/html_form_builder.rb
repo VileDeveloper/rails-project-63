@@ -2,32 +2,32 @@
 
 autoload :TagBuilder, File.expand_path('tag_builder.rb', __dir__)
 
-# Module build html form by form_for and input_fields hashes
+# Module build html form by form_for and fields hashes
 module HtmlFormBuilder
   class << self
-    def build(form_for:, input_fields:)
+    def build(form_for:, fields:)
       field_tag = form_for[:field_tag]
       tag_parameters = form_for[:tag_parameters]
-      input_fields_html = input_fields_html(input_fields)
+      fields_html = fields_html(fields)
 
-      ::TagBuilder.build(field_tag, **tag_parameters) { input_fields_html }
+      ::TagBuilder.build(field_tag, **tag_parameters) { fields_html }
     end
 
     private
 
-    def input_fields_html(input_fields)
-      return '' if input_fields.empty?
+    def fields_html(fields)
+      return '' if fields.empty?
 
-      input_fields_html_array =
-        input_fields.map do |input_field|
-          field_tag = input_field[:field_tag]
-          tag_parameters = input_field[:tag_parameters]
-          tag_body = input_field[:tag_body]
+      fields_html_array =
+        fields.map do |field|
+          field_tag = field[:field_tag]
+          tag_parameters = field[:tag_parameters]
+          tag_body = field[:tag_body]
 
           ::TagBuilder.build(field_tag, **tag_parameters) { tag_body }
         end
 
-      "\n  #{input_fields_html_array.join("\n  ")}\n"
+      "\n  #{fields_html_array.join("\n  ")}\n"
     end
   end
 end

@@ -8,8 +8,8 @@ autoload :SubmitField, File.expand_path('../fields/submit_field.rb', __dir__)
 autoload :LabelField, File.expand_path('../fields/label_field.rb', __dir__)
 
 # This is main Field class with choice fields kind
-class FormFieldBuilder
-  FIELDS_AS_KIND =
+class FormItemBuilder
+  ITEMS_AS_KIND =
     {
       text: 'TextAreaField',
       submit: 'SubmitField',
@@ -17,16 +17,16 @@ class FormFieldBuilder
       default: 'InputField'
     }.freeze
 
-  def initialize(resource, field_name, as, **parameters)
+  def initialize(resource, item_name, item_kind, **parameters)
     @resource = resource
-    @field_name = field_name
-    @as = as
+    @item_name = item_name
+    @item_kind = item_kind
     @parameters = parameters
   end
 
   def build
-    field_class = FIELDS_AS_KIND[@as || :default].constantize
+    item_class = ITEMS_AS_KIND[@item_kind || :default].constantize
 
-    field_class.new(@resource, @field_name, **@parameters).build
+    item_class.new(@resource, @item_name, **@parameters).build
   end
 end
