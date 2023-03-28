@@ -21,7 +21,7 @@ class FormBuilder
     )
   end
 
-  def input(item_name, as: :default, **parameters)
+  def input(item_name, as: :input, **parameters)
     @items << { item_name:, item_kind: :label, parameters: }
     @items << { item_name:, item_kind: as, parameters: }
   end

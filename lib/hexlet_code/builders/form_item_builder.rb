@@ -3,20 +3,12 @@
 require 'active_support/inflector'
 
 autoload :InputField, File.expand_path('../fields/input_field.rb', __dir__)
-autoload :TextAreaField, File.expand_path('../fields/text_area_field.rb', __dir__)
+autoload :TextField, File.expand_path('../fields/text_field.rb', __dir__)
 autoload :SubmitField, File.expand_path('../fields/submit_field.rb', __dir__)
 autoload :LabelField, File.expand_path('../fields/label_field.rb', __dir__)
 
 # This is main Field class with choice fields kind
 class FormItemBuilder
-  ITEMS_AS_KIND =
-    {
-      text: 'TextAreaField',
-      submit: 'SubmitField',
-      label: 'LabelField',
-      default: 'InputField'
-    }.freeze
-
   def initialize(resource, item_name, item_kind, **parameters)
     @resource = resource
     @item_name = item_name
@@ -25,7 +17,7 @@ class FormItemBuilder
   end
 
   def build
-    item_class = ITEMS_AS_KIND[@item_kind || :default].constantize
+    item_class = "#{@item_kind}_field".camelize.constantize
 
     item_class.new(@resource, @item_name, **@parameters).build
   end

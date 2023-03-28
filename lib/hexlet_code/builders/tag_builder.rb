@@ -2,19 +2,16 @@
 
 # Module generate html tag by parameters
 module TagBuilder
-  PAIRED_TAGS = %w[div form head html label p span table textarea ul].freeze
   UNPAIRED_TAGS = %w[br hr img input meta].freeze
 
   class << self
     def build(tag, **options)
       body = yield if block_given?
 
-      if PAIRED_TAGS.include?(tag)
-        build_paired(tag, options, body)
-      elsif UNPAIRED_TAGS.include?(tag)
+      if UNPAIRED_TAGS.include?(tag)
         build_unpaired(tag, options)
       else
-        raise 'Unknown tag!'
+        build_paired(tag, options, body)
       end
     end
 

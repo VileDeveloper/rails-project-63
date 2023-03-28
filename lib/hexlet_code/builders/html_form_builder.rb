@@ -8,17 +8,17 @@ module HtmlFormBuilder
     def build(form_for:, fields:)
       field_tag = form_for[:field_tag]
       tag_parameters = form_for[:tag_parameters]
-      fields_html = fields_html(fields)
+      html_fields = get_html_fields(fields)
 
-      ::TagBuilder.build(field_tag, **tag_parameters) { fields_html }
+      ::TagBuilder.build(field_tag, **tag_parameters) { html_fields }
     end
 
     private
 
-    def fields_html(fields)
+    def get_html_fields(fields)
       return '' if fields.empty?
 
-      fields_html_array =
+      html_fields =
         fields.map do |field|
           field_tag = field[:field_tag]
           tag_parameters = field[:tag_parameters]
@@ -27,7 +27,7 @@ module HtmlFormBuilder
           ::TagBuilder.build(field_tag, **tag_parameters) { tag_body }
         end
 
-      "\n  #{fields_html_array.join("\n  ")}\n"
+      "\n  #{html_fields.join("\n  ")}\n"
     end
   end
 end

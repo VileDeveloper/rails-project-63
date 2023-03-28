@@ -2,8 +2,8 @@
 
 autoload :BaseField, File.expand_path('base_field.rb', __dir__)
 
-# TextArea field class for generate correct tag
-class TextAreaField < BaseField
+# Text field class for generate correct tag
+class TextField < BaseField
   FIELD_TAG = 'textarea'
   DEFAULT_COLS = '20'
   DEFAULT_ROWS = '40'
